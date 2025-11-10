@@ -59,8 +59,7 @@ public class KeypadSystem : MonoBehaviour
         }
 
         string temp = resultText.text;
-        if (temp.Length > 0) temp.Substring(0, temp.Length - 1);
-        resultText.text = temp;
+        if (temp.Length > 0) resultText.text = temp.Substring(0, temp.Length - 1);
 
         Debug.Log($"{inputResult[currentInputIndex - 1]}가 삭제되었습니다.");
         inputResult[currentInputIndex - 1] = -1;
@@ -82,7 +81,11 @@ public class KeypadSystem : MonoBehaviour
         if (isCorrect)    //비번 입력을 맞출 경우
         {
             Debug.Log("비밀번호를 맞추셨습니다. 서랍 잠금이 해제됩니다.");
-            //잠금 해제 함수 (서랍 잠금 해제)
+            DrawerLocker locker = FindObjectOfType<DrawerLocker>();
+            if (locker != null)
+            {
+                locker.unLock();     //잠금 해제 함수 (서랍 잠금 해제)
+            }
         }
         else
         {
